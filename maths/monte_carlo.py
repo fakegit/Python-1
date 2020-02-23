@@ -26,7 +26,8 @@ def pi_estimator(iterations: int):
 
     # The proportion of guesses that landed in the circle
     proportion = mean(
-        int(in_circle(uniform(-1.0, 1.0), uniform(-1.0, 1.0))) for _ in range(iterations)
+        int(in_circle(uniform(-1.0, 1.0), uniform(-1.0, 1.0)))
+        for _ in range(iterations)
     )
     # The ratio of the area for circle to square is pi/4.
     pi_estimate = proportion * 4
@@ -35,9 +36,9 @@ def pi_estimator(iterations: int):
     print("The total error is ", abs(pi - pi_estimate))
 
 
-def area_under_line_estimator(iterations: int,
-                              min_value: float=0.0,
-                              max_value: float=1.0) -> float:
+def area_under_line_estimator(
+    iterations: int, min_value: float = 0.0, max_value: float = 1.0
+) -> float:
     """
     An implementation of the Monte Carlo method to find area under
        y = x where x lies between min_value to max_value
@@ -49,24 +50,28 @@ def area_under_line_estimator(iterations: int,
     4. Actual value = (max_value^2 - min_value^2) / 2
     5. Returns estimated value
     """
-    return mean(uniform(min_value, max_value) for _ in range(iterations)) * (max_value - min_value)
+    return mean(uniform(min_value, max_value) for _ in range(iterations)) * (
+        max_value - min_value
+    )
 
 
-def area_under_line_estimator_check(iterations: int,
-                                    min_value: float=0.0,
-                                    max_value: float=1.0) -> None:
+def area_under_line_estimator_check(
+    iterations: int, min_value: float = 0.0, max_value: float = 1.0
+) -> None:
     """
     Checks estimation error for area_under_line_estimator func
     1. Calls "area_under_line_estimator" function
     2. Compares with the expected value
     3. Prints estimated, expected and error value
     """
-    
+
     estimated_value = area_under_line_estimator(iterations, min_value, max_value)
-    expected_value = (max_value*max_value - min_value*min_value) / 2
-    
+    expected_value = (max_value * max_value - min_value * min_value) / 2
+
     print("******************")
-    print("Estimating area under y=x where x varies from ",min_value, " to ",max_value)
+    print(
+        "Estimating area under y=x where x varies from ", min_value, " to ", max_value
+    )
     print("Estimated value is ", estimated_value)
     print("Expected value is ", expected_value)
     print("Total error is ", abs(estimated_value - expected_value))
